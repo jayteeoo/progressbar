@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import { Progress, Select, Button } from 'antd';
+import { Select, Button } from 'antd';
 
 import './progressbar.css';
 
@@ -81,8 +81,14 @@ class ProgressComponent extends Component {
 			});
 
 			buttonElements = progressObject.buttons.map((value, index) => {
+				let displayValue = value;
+
+				if (`${value}`.indexOf('-') === -1) {
+					displayValue = `+${value}`;
+				}
+
 				return (
-					<Button key={`button${index}`} onClick={() => this.changeProgress(value)}>{value}</Button>
+					<Button key={`button${index}`} onClick={() => this.changeProgress(value)}>{displayValue}</Button>
 				);
 			});
 		}
